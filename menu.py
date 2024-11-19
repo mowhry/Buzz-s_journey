@@ -24,6 +24,7 @@ class MainMenu(Menu):
         self.startx, self.starty = self.mid_w, self.mid_h + 30
         self.optionx, self.optiony = self.mid_w, self.mid_h + 70
         self.creditx, self.credity = self.mid_w, self.mid_h + 110
+        self.exitx, self.exity = self.mid_w, self.mid_h + 150
         self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
 
     def display_menu(self):
@@ -38,6 +39,7 @@ class MainMenu(Menu):
             self.game.draw_text("Start Game", 40, self.startx, self.starty, (255, 255, 255))
             self.game.draw_text("Options", 40, self.optionx, self.optiony, (255, 255, 255))
             self.game.draw_text("Credits", 40, self.creditx, self.credity, (255, 255, 255))
+            self.game.draw_text("Exit", 40, self.exitx, self.exity, (255, 255, 255))
             self.draw_cursor()
             self.blit_screen()
 
@@ -50,18 +52,24 @@ class MainMenu(Menu):
                 self.cursor_rect.midtop = (self.creditx + self.offset, self.credity)
                 self.state = "Credits"
             elif self.state == "Credits":
+                self.cursor_rect.midtop = (self.exitx + self.offset, self.exity)
+                self.state = "Exit"
+            elif self.state == "Exit":
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
                 self.state = "Start"
         elif self.game.UP_KEY:
             if self.state == "Start":
-                self.cursor_rect.midtop = (self.creditx + self.offset, self.credity)
-                self.state = "Credits"
+                self.cursor_rect.midtop = (self.exitx + self.offset, self.exity)
+                self.state = "Exit"
             elif self.state == "Options":
                 self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
                 self.state = "Start"
             elif self.state == "Credits":
                 self.cursor_rect.midtop = (self.optionx + self.offset, self.optiony)
                 self.state = "Options"
+            elif self.state == "Exit":
+                self.cursor_rect.midtop = (self.creditx + self.offset, self.credity)
+                self.state = "Credits"
 
     def check_input(self):
         self.move_cursor()
@@ -72,6 +80,8 @@ class MainMenu(Menu):
                 self.game.current_menu = self.game.options_menu
             elif self.state == "Credits":
                 self.game.current_menu = self.game.credits_menu
+            elif self.state == "Exit":
+                self.game.running, self.game.playing = False, False
             self.run_display = False
 
 class OptionsMenu(Menu):
