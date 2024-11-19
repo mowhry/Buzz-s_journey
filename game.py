@@ -1,6 +1,6 @@
 import  pygame
 from pygame.locals import *
-from menu import MainMenu
+from menu import *
 
 class Game():
     def __init__(self):
@@ -11,7 +11,10 @@ class Game():
         self.display = pygame.Surface((self.WINDOW_W, self.WINDOW_H))
         self.window = pygame.display.set_mode(((self.WINDOW_W, self.WINDOW_H)))
         self.font_name = "./assets/Gamepaused.otf"
-        self.current_menu = MainMenu(self)
+        self.main_menu = MainMenu(self)
+        self.options_menu = OptionsMenu(self)
+        self.credits_menu = CreditMenu(self)
+        self.current_menu = self.main_menu
 
     def game_loop(self):
         while self.playing:
