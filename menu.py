@@ -10,7 +10,7 @@ class Menu():
         self.offset = -100
 
     def draw_cursor(self):
-        self.game.draw_text("x", 15, self.cursor_rect.x, self.cursor_rect.y)
+        self.game.draw_text("x", 15, self.cursor_rect.x, self.cursor_rect.y, (255, 255, 255))
 
     def blit_screen(self):
         self.game.window.blit(self.game.display, (0, 0))
@@ -22,8 +22,8 @@ class MainMenu(Menu):
         Menu.__init__(self, game)
         self.state = "Start"
         self.startx, self.starty = self.mid_w, self.mid_h + 30
-        self.optionx, self.optiony = self.mid_w, self.mid_h + 50
-        self.creditx, self.credity = self.mid_w, self.mid_h + 70
+        self.optionx, self.optiony = self.mid_w, self.mid_h + 70
+        self.creditx, self.credity = self.mid_w, self.mid_h + 110
         self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
 
     def display_menu(self):
@@ -32,10 +32,12 @@ class MainMenu(Menu):
             self.game.check_event()
             self.check_input()
             self.game.display.fill((0, 0 ,0))
-            self.game.draw_text("Main Menu", 20, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 20)
-            self.game.draw_text("Start Game", 20, self.startx, self.starty)
-            self.game.draw_text("Options", 20, self.optionx, self.optiony)
-            self.game.draw_text("Credits", 20, self.creditx, self.credity)
+            for bg in self.game.backgrounds:
+                self.game.display.blit(bg, (0, 0))
+            self.game.draw_text("Main Menu", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
+            self.game.draw_text("Start Game", 40, self.startx, self.starty, (255, 255, 255))
+            self.game.draw_text("Options", 40, self.optionx, self.optiony, (255, 255, 255))
+            self.game.draw_text("Credits", 40, self.creditx, self.credity, (255, 255, 255))
             self.draw_cursor()
             self.blit_screen()
 
@@ -85,9 +87,11 @@ class OptionsMenu(Menu):
             self.game.check_event()
             self.check_input()
             self.game.display.fill((0, 0 ,0))
-            self.game.draw_text("Options", 40, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30)
-            self.game.draw_text("Volume", 20, self.volx, self.voly)
-            self.game.draw_text("Controls", 20, self.controlx, self.controly)
+            for bg in self.game.dawnbg:
+                self.game.display.blit(bg, (0, 0))
+            self.game.draw_text("Options", 40, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (255, 255, 255))
+            self.game.draw_text("Volume", 20, self.volx, self.voly, (255, 255, 255))
+            self.game.draw_text("Controls", 20, self.controlx, self.controly, (255, 255, 255))
             self.draw_cursor()
             self.blit_screen()
 
@@ -110,8 +114,7 @@ class CreditMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = "Credit"
-        self.credx, self.credy = self.mid_w, self.mid_h + 20
-        self.px, self.py = self.mid_w, self.mid_h + 50
+        self.px, self.py = self.mid_w, self.mid_h + 40
         self.p2x, self.p2y = self.mid_w, self.mid_h + 70
 
     def display_menu(self):
@@ -122,7 +125,9 @@ class CreditMenu(Menu):
                 self.game.current_menu = self.game.main_menu
                 self.run_display = False
             self.game.display.fill((0, 0, 0))
-            self.game.draw_text("Credits", 30, self.credx, self.credy)
-            self.game.draw_text("Made by Mowhry with love", 20, self.px, self.py)
-            self.game.draw_text("You can drop a star on this repo !", 20, self.p2x, self.p2y)
+            for bg in self.game.nightybg:
+                self.game.display.blit(bg, (0, 0))
+            self.game.draw_text("Credits", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
+            self.game.draw_text("Made by Mowhry with buzz sleeping on my desk ZZzzZz", 30, self.px, self.py, (255, 255, 255))
+            self.game.draw_text("You can drop a star on this repo !", 30, self.p2x, self.p2y, (255, 255, 255))
             self.blit_screen()
