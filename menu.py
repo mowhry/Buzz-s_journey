@@ -138,6 +138,6 @@ class CreditMenu(Menu):
             for bg in self.game.nightybg:
                 self.game.display.blit(bg, (0, 0))
             self.game.draw_text("Credits", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
-            self.game.draw_text("Made by Mowhry with buzz sleeping on my desk ZZzzZz", 30, self.px, self.py, (255, 255, 255))
+            self.game.draw_text("Music: Jake Lake - Final Refuge\nCoded by Mowhry with buzz sleeping on my desk ZZzzZz", 30, self.px, self.py, (255, 255, 255))
             self.game.draw_text("You can drop a star on this repo !", 30, self.p2x, self.p2y, (255, 255, 255))
             self.blit_screen()

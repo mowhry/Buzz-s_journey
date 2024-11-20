@@ -1,16 +1,19 @@
-import  pygame
+import  pygame, sys, time
 from pygame.locals import *
 from menu import *
 
 class Game():
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load("./assets/Jake_Lake_Final_Refuge.wav")
+        pygame.mixer.music.play(loops=-1, start=1, fade_ms=0)
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.ESC_KEY = False, False, False, False, False
         self.WINDOW_W, self.WINDOW_H = 1200, 800
         self.display = pygame.Surface((self.WINDOW_W, self.WINDOW_H))
         self.window = pygame.display.set_mode(((self.WINDOW_W, self.WINDOW_H)))
-        self.font_name = "./assets/Gamepaused.otf"
+        self.font_name = "./assets/Daydream.ttf"
         self.main_menu = MainMenu(self)
         self.options_menu = OptionsMenu(self)
         self.credits_menu = CreditMenu(self)
@@ -66,9 +69,11 @@ class Game():
     def reset_key(self):
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.ESC_KEY = False, False, False, False, False
 
-    def draw_text(self, text, size, x, y, color):
-        font = pygame.font.Font(self.font_name,size)
-        text_surface = font.render(text, True, color)
-        text_rect = text_surface.get_rect()
-        text_rect.center = (x, y)
-        self.display.blit(text_surface, text_rect)
+    def draw_text(self, text, size, x, y, color, line_spacing = 1):
+        font = pygame.font.Font(self.font_name, size)
+        lines = text.split("\n")
+        for i, line in enumerate(lines):
+            text_surface = font.render(line, True, color)
+            text_rect = text_surface.get_rect()
+            text_rect.center = (x, y + i * (size + line_spacing))
+            self.display.blit(text_surface, text_rect)
