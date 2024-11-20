@@ -7,10 +7,10 @@ class Menu():
         self.mid_w, self.mid_h = self.game.WINDOW_W/2, self.game.WINDOW_H/2
         self.run_display = True
         self.cursor_rect = pygame.Rect(0, 0, 20, 20)
-        self.offset = -100
+        self.offset = -150
 
-    def draw_cursor(self):
-        self.game.draw_text("x", 15, self.cursor_rect.x, self.cursor_rect.y, (255, 255, 255))
+    # def draw_cursor(self):
+    #     self.game.draw_text("x", 15, self.cursor_rect.x, self.cursor_rect.y, (232, 135, 183))
 
     def blit_screen(self):
         self.game.window.blit(self.game.display, (0, 0))
@@ -21,11 +21,16 @@ class MainMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = "Start"
-        self.startx, self.starty = self.mid_w, self.mid_h + 30
-        self.optionx, self.optiony = self.mid_w, self.mid_h + 70
-        self.creditx, self.credity = self.mid_w, self.mid_h + 110
+        self.startx, self.starty = self.mid_w, self.mid_h
+        self.optionx, self.optiony = self.mid_w, self.mid_h + 50
+        self.creditx, self.credity = self.mid_w, self.mid_h + 100
         self.exitx, self.exity = self.mid_w, self.mid_h + 150
         self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
+
+        self.start_color = (255, 255, 255)
+        self.option_color = (255, 255, 255)
+        self.credit_color = (255, 255, 255)
+        self.exit_color = (255, 255, 255)
 
     def display_menu(self):
         self.run_display = True
@@ -35,12 +40,18 @@ class MainMenu(Menu):
             self.game.display.fill((0, 0 ,0))
             for bg in self.game.backgrounds:
                 self.game.display.blit(bg, (0, 0))
-            self.game.draw_text("Main Menu", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
-            self.game.draw_text("Start Game", 40, self.startx, self.starty, (255, 255, 255))
-            self.game.draw_text("Options", 40, self.optionx, self.optiony, (255, 255, 255))
-            self.game.draw_text("Credits", 40, self.creditx, self.credity, (255, 255, 255))
-            self.game.draw_text("Exit", 40, self.exitx, self.exity, (255, 255, 255))
-            self.draw_cursor()
+            self.game.draw_text("Main Menu", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 100, (255, 255, 255))
+
+            self.start_color = (232, 135, 183) if self.state == "Start" else (255, 255, 255)
+            self.option_color = (232, 135, 183) if self.state == "Options" else (255, 255, 255)
+            self.credit_color = (232, 135, 183) if self.state == "Credits" else (255, 255, 255)
+            self.exit_color = (232, 135, 183) if self.state == "Exit" else (255, 255, 255)
+
+            self.game.draw_text("Start Game", 40, self.startx, self.starty, (self.start_color))
+            self.game.draw_text("Options", 40, self.optionx, self.optiony, (self.option_color))
+            self.game.draw_text("Credits", 40, self.creditx, self.credity, (self.credit_color))
+            self.game.draw_text("Exit", 40, self.exitx, self.exity, (self.exit_color))
+            # self.draw_cursor()
             self.blit_screen()
 
     def move_cursor(self):
@@ -88,8 +99,11 @@ class OptionsMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = "Volume"
-        self.volx, self.voly = self.mid_w, self.mid_h + 40
-        self.controlx, self.controly = self.mid_w, self.mid_h + 80
+        self.volx, self.voly = self.mid_w, self.mid_h + 50
+        self.controlx, self.controly = self.mid_w, self.mid_h + 100
+
+        self.volume_color = (255, 255, 255)
+        self.control_color = (255, 255, 255)
 
     def display_menu(self):
         self.run_display = True
@@ -99,10 +113,14 @@ class OptionsMenu(Menu):
             self.game.display.fill((0, 0 ,0))
             for bg in self.game.dawnbg:
                 self.game.display.blit(bg, (0, 0))
+
+            self.volume_color = (232, 135, 183) if self.state == "Volume" else (255, 255, 255)
+            self.control_color = (232, 135, 183) if self.state == "Controls" else (255, 255, 255)
+
             self.game.draw_text("Options", 70, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (255, 255, 255))
-            self.game.draw_text("Volume", 40, self.volx, self.voly, (255, 255, 255))
-            self.game.draw_text("Controls", 40, self.controlx, self.controly, (255, 255, 255))
-            self.draw_cursor()
+            self.game.draw_text("Volume", 40, self.volx, self.voly, (self.volume_color))
+            self.game.draw_text("Controls", 40, self.controlx, self.controly, (self.control_color))
+            # self.draw_cursor()
             self.blit_screen()
 
     def check_input(self):
@@ -125,7 +143,6 @@ class CreditMenu(Menu):
         Menu.__init__(self, game)
         self.state = "Credit"
         self.px, self.py = self.mid_w, self.mid_h + 40
-        self.p2x, self.p2y = self.mid_w, self.mid_h + 70
 
     def display_menu(self):
         self.run_display = True
@@ -138,6 +155,5 @@ class CreditMenu(Menu):
             for bg in self.game.nightybg:
                 self.game.display.blit(bg, (0, 0))
             self.game.draw_text("Credits", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
-            self.game.draw_text("Music: Jake Lake - Final Refuge\nCoded by Mowhry with buzz sleeping on my desk ZZzzZz", 30, self.px, self.py, (255, 255, 255))
-            self.game.draw_text("You can drop a star on this repo !", 30, self.p2x, self.p2y, (255, 255, 255))
+            self.game.draw_text("Music: Jake Lake - Final Refuge\nCoded by Jessim Skiba with buzz sleeping on my desk\nYou can drop a star on this repo !", 15, self.px, self.py, (255, 255, 255))
             self.blit_screen()

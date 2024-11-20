@@ -69,7 +69,7 @@ class Game():
     def reset_key(self):
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.ESC_KEY = False, False, False, False, False
 
-    def draw_text(self, text, size, x, y, color, line_spacing = 1):
+    def draw_text(self, text, size, x, y, color, line_spacing = 10):
         font = pygame.font.Font(self.font_name, size)
         lines = text.split("\n")
         for i, line in enumerate(lines):
