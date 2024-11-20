@@ -88,8 +88,8 @@ class OptionsMenu(Menu):
     def __init__(self, game):
         Menu.__init__(self, game)
         self.state = "Volume"
-        self.volx, self.voly = self.mid_w, self.mid_h + 20
-        self.controlx, self.controly = self.mid_w, self.mid_h + 40
+        self.volx, self.voly = self.mid_w, self.mid_h + 40
+        self.controlx, self.controly = self.mid_w, self.mid_h + 80
 
     def display_menu(self):
         self.run_display = True
@@ -99,9 +99,9 @@ class OptionsMenu(Menu):
             self.game.display.fill((0, 0 ,0))
             for bg in self.game.dawnbg:
                 self.game.display.blit(bg, (0, 0))
-            self.game.draw_text("Options", 40, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (255, 255, 255))
-            self.game.draw_text("Volume", 20, self.volx, self.voly, (255, 255, 255))
-            self.game.draw_text("Controls", 20, self.controlx, self.controly, (255, 255, 255))
+            self.game.draw_text("Options", 70, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (255, 255, 255))
+            self.game.draw_text("Volume", 40, self.volx, self.voly, (255, 255, 255))
+            self.game.draw_text("Controls", 40, self.controlx, self.controly, (255, 255, 255))
             self.draw_cursor()
             self.blit_screen()
 
