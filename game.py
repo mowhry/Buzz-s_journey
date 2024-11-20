@@ -1,6 +1,8 @@
 import  pygame, sys, time
 from pygame.locals import *
 from menu import *
+from map import *
+from level import *
 
 class Game():
     def __init__(self):
@@ -10,7 +12,7 @@ class Game():
         pygame.mixer.music.play(loops=-1, start=1, fade_ms=0)
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.ESC_KEY = False, False, False, False, False
-        self.WINDOW_W, self.WINDOW_H = 1200, 800
+        self.WINDOW_W, self.WINDOW_H = 1200, 768
         self.display = pygame.Surface((self.WINDOW_W, self.WINDOW_H))
         self.window = pygame.display.set_mode(((self.WINDOW_W, self.WINDOW_H)))
         self.font_name = "./assets/Daydream.ttf"
@@ -18,6 +20,9 @@ class Game():
         self.options_menu = OptionsMenu(self)
         self.credits_menu = CreditMenu(self)
         self.current_menu = self.main_menu
+        self.levels = [Level0(self)]
+        self.current_level_index = 0
+        self.current_level = self.levels[self.current_level_index]
         self.backgrounds = [
             pygame.image.load(f"./assets/Clouds/Clouds_4/{i}.png").convert_alpha()
             for i in range(1, 5, 1)
@@ -44,7 +49,7 @@ class Game():
             self.display.fill((0, 0, 0))
             for bg in self.backgrounds:
                 self.display.blit(bg, (0,0))
-            self.draw_text("Thanks for Playing", 20, self.WINDOW_W/2, self.WINDOW_H/2, (255, 255, 255))
+            self.current_level.draw()
             self.window.blit(self.display, (0,0))
             pygame.display.update()
             self.reset_key()
@@ -77,3 +82,11 @@ class Game():
             text_rect = text_surface.get_rect()
             text_rect.center = (x, y + i * (size + line_spacing))
             self.display.blit(text_surface, text_rect)
+
+    def next_level(self):
+        if self.current_level_index < len(self.levels) - 1:
+            self.current_level_index += 1
+            self.current_level = self.levels[self.current_level_index]
+        else:
+            self.playing = False
+            self.current_menu = self.credits_menu
