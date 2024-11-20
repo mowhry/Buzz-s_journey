@@ -12,7 +12,7 @@ class Game():
         pygame.mixer.music.play(loops=-1, start=1, fade_ms=0)
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY, self.ESC_KEY = False, False, False, False, False
-        self.WINDOW_W, self.WINDOW_H = 1200, 768
+        self.WINDOW_W, self.WINDOW_H = 1216, 800
         self.display = pygame.Surface((self.WINDOW_W, self.WINDOW_H))
         self.window = pygame.display.set_mode(((self.WINDOW_W, self.WINDOW_H)))
         self.font_name = "./assets/Daydream.ttf"

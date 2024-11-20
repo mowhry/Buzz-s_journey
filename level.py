@@ -17,7 +17,7 @@ class Level():
 
 class Level0(Level):
     def __init__(self, game):
-        super().__init__(game, "./assets/map_level/map0.buzz")
+        super().__init__(game, "./assets/map_level/map0.csv")
 
     def update(self):
         super().update()
