@@ -3,11 +3,12 @@ import pygame
 class Player():
 	def __init__(self):
 		self.image = pygame.image.load("./assets/Pink_Monster.png").convert_alpha()
+		self.image = pygame.transform.scale(self.image, (48, 48))
 		print(f"Taille de l'image du joueur : {self.image.get_size()}")
 		self.rect = self.image.get_rect()
 		self.LEFT_KEY, self.RIGHT_KEY, self.FACING_LEFT = False, False, False
 		self.is_jumping, self.on_ground = False, False
-		self.gravity, self.friction = 0.35, -.12
+		self.gravity, self.friction = 0.3, -.12
 		self.position, self.velocity = pygame.math.Vector2(0, 0), pygame.math.Vector2(0, 0)
 		self.acceleration = pygame.math.Vector2(0, self.gravity)
 		self.rect.topleft = self.position
@@ -41,10 +42,10 @@ class Player():
 		self.velocity.y += self.acceleration.y * dt
 		if self.velocity.y > 7: self.velocity.y = 7 #limite de la vitesse du saut
 		self.position.y += self.velocity.y * dt + (self.acceleration.y * .5) * (dt * dt)
-		if self.position.y > 512:
+		if self.position.y > 496:
 			self.on_ground = True
 			self.velocity.y = 0
-			self.position.y = 512
+			self.position.y = 496
 		self.rect.bottom = self.position.y
 
 	def jump(self):

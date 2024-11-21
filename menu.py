@@ -40,7 +40,7 @@ class MainMenu(Menu):
             self.game.display.fill((0, 0 ,0))
             for bg in self.game.backgrounds:
                 self.game.display.blit(bg, (0, 0))
-            self.game.draw_text("Main Menu", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 100, (255, 255, 255))
+            self.game.draw_text("Main Menu", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 100, (232, 135, 183))
 
             self.start_color = (232, 135, 183) if self.state == "Start" else (255, 255, 255)
             self.option_color = (232, 135, 183) if self.state == "Options" else (255, 255, 255)
@@ -117,7 +117,7 @@ class OptionsMenu(Menu):
             self.volume_color = (232, 135, 183) if self.state == "Volume" else (255, 255, 255)
             self.control_color = (232, 135, 183) if self.state == "Controls" else (255, 255, 255)
 
-            self.game.draw_text("Options", 70, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (255, 255, 255))
+            self.game.draw_text("Options", 70, self.game.WINDOW_W / 2, self.game.WINDOW_H / 2 - 30, (232, 135, 183))
             self.game.draw_text("Volume", 40, self.volx, self.voly, (self.volume_color))
             self.game.draw_text("Controls", 40, self.controlx, self.controly, (self.control_color))
             # self.draw_cursor()
@@ -154,6 +154,6 @@ class CreditMenu(Menu):
             self.game.display.fill((0, 0, 0))
             for bg in self.game.nightybg:
                 self.game.display.blit(bg, (0, 0))
-            self.game.draw_text("Credits", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (255, 255, 255))
-            self.game.draw_text("Music: Jake Lake - Final Refuge\nCoded by Jessim Skiba with buzz sleeping on my desk\nYou can drop a star on this repo !", 15, self.px, self.py, (255, 255, 255))
+            self.game.draw_text("Credits", 60, self.game.WINDOW_W/2, self.game.WINDOW_H/2 - 30, (232, 135, 183))
+            self.game.draw_text("Music: Jake Lake - Final Refuge\nCoded by Jessim Skiba with buzz sleeping on my desk\nYou can drop a star on this repo !", 15, self.px, self.py, (232, 135, 183))
             self.blit_screen()
