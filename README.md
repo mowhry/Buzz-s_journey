@@ -8,6 +8,7 @@
 - ~~refaire UI car font changer✔️~~
 - ~~ajouter volume menu✔️~~
 - ~~importer carte depuis fichier✔️~~
-- ajouter physique sur la map
-- ajouter player
-- ajouter sprite au player
+- ~~ajouter physique sur la map✔️~~
+- ~~ajouter player✔️~~
+- ajouter collision au player
+- ajouter sprite et facing direction au player

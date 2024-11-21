@@ -17,6 +17,7 @@ class Level():
 
 class Level0(Level):
     def __init__(self, game):
+        self.startx, self.starty = 100, 300
         super().__init__(game, "./assets/map_level/map0.csv")
 
     def update(self):

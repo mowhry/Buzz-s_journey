@@ -23,11 +23,9 @@ class Map:
 
         print("Numéros de tuiles uniques dans la carte :", tile_numbers)
 
-        # Charger les images des tuiles
         self.tileset_images = {}
         for tile_num in tile_numbers:
-            # Ajuster le numéro de tuile pour correspondre au nom du fichier
-            image_tile_num = tile_num + 1  # ID 0 correspond à Tile_1.png, etc.
+            image_tile_num = tile_num + 1
             image_path = f"./assets/tileset/Tile_{image_tile_num}.png"
             if os.path.isfile(image_path):
                 try:
