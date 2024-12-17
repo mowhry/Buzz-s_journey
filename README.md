@@ -1,6 +1,7 @@
 # Buzz-s_journey
 
-## TODO list:
+## TODO list
+
 - ~~ajouter le bouton exit  ✔️~~
 - ~~mettre un background au menu  ✔️~~
 - ~~faire UI menu controle ✔️~~
